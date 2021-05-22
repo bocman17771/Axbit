@@ -11,17 +11,18 @@
     </div>
     <nav class="d-flex align-center">
       <ul 
-      v-for="(item, i) in list.arr" 
+      v-for="item in list" 
       :key="item.title"
       >
-        <li 
-        :class="list.active === i ? 'grey--text' : ''"
-        @click="goToRouter({
-          url: item.url,
-          i: i
-        })"
-        >
-          {{item.title}}
+        <li>
+          <router-link
+          tag="li"
+          active-class="grey--text"
+          :to="item.url"
+          :exact="item.exact"
+          >
+            {{ item.title }}
+          </router-link>
         </li>
       </ul>
     </nav>
@@ -37,22 +38,13 @@ export default {
   data: () => ({
     date: new Date(),
     time: null,
-    list: { 
-      arr: [
-        {title: 'Погода', url: '/'},
-        {title: 'Время', url: '/time'}
-      ],
-      active: 0
-    }
+    list: [
+      {title: 'Погода', url: '/', exact: true},
+      {title: 'Время', url: '/time'}
+    ],
   }),
   mounted() {
     this.time = setInterval(() => this.date = new Date(), 1000)
-  },
-  methods: {
-    goToRouter(obj) {
-      this.$router.push(obj.url)
-      this.list.active = obj.i
-    }
   }
 }
 </script>

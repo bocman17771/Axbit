@@ -1,10 +1,12 @@
 <template>
   <v-row class="d-flex justify-center py-10">
     <v-col cols="4">
-      <form class="d-flex align-center">
+      <form 
+      class="d-flex align-center" 
+      @submit.prevent="onSubmit({id: city.current})"
+      >
         <v-autocomplete
         class="mr-5"
-        @change="onSubmit({id: city.current})"
         auto-select-first
         :items="city.arr"
         v-model="city.current"
@@ -13,6 +15,13 @@
         clearable
         label="Выбери город"
         />
+        <v-btn 
+        class="button" 
+        type="submit"
+        
+        >
+          Показать погоду
+        </v-btn>
       </form>
     </v-col>
   </v-row>

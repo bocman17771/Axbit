@@ -26,11 +26,11 @@
         {{getTemp}}&deg;C
         </v-col>
         <v-col cols="6">
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/sun.png"
-            alt="Sunny image"
-            width="92"
-          ></v-img>
+          <div 
+          :class="`bckg bckg_${weather.main}`"
+          v-for="weather in data.weather"
+          :key="weather.id"
+          />
         </v-col>
       </v-row>
     </v-card-text>
@@ -68,6 +68,20 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+  .bckg {
+    height: 92px;
+    width: 92px;
+    background-position: center;
+    background-size: cover;
+    &_Rain {
+      background-image: url('~@/assets/img/rain.png'),;
+    }
+    &_Sun {
+      background-image: url('~@/assets/img/sun.png'),;
+    }
+    &_Clouds {
+      background-image: url('~@/assets/img/clouds.jpg'),;
+    }
+  }
 </style>
